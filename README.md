@@ -1,25 +1,22 @@
 # V-Server Setup with SSH & Nginx
-
+This project explains how to securely configure a Linux V-Server using SSH key authentication and how to install and configure an Nginx web server.  
+It also demonstrates how to host an alternative website on a custom port. 
 ---
 
 ## Table of Contents
-- [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
-- [Usage](#usage)
+- [Setup SSH Connection](#setup-ssh-connection)
   - [Create SSH Keys](#create-ssh-keys)
-  - [First Login with Password](#first-login-with-password)
+  - [Login with Password](#login-with-password)
   - [Enable SSH Key Login](#enable-ssh-key-login)
   - [Disable Password Authentication](#disable-password-authentication)
-- [Install Nginx](#install-nginx)
+- [Setup Nginx](#setup-nginx)
   - [Installation Process](#installation-process)
   - [Create an Alternative Website](#create-an-alternative-website)
-
-
----
-
-## Introduction
-This project explains how to securely configure a Linux V-Server using SSH key authentication and how to install and configure an Nginx web server.  
-It also demonstrates how to host an alternative website on a custom port.
+- [Configure Git and Github connection](#configure-git-and-github-connection)
+  - [Generate the SSH Key](#generate-the-ssh-key)
+  - [Grab your SSH Key](#grab-your-ssh-key)
+  - [Add the Key to Github](#add-the-key-to-github)
 
 ---
 
@@ -31,9 +28,9 @@ To follow this guide, you need:
 
 ---
 
-## Usage
+## Setup SSH connection
 
-### 1. Create SSH Keys
+### Create SSH Keys
 
 Generate an SSH key pair on your local machine using the recommended `ed25519` algorithm:
 ```bash
@@ -42,7 +39,7 @@ ssh-keygen -t ed25519 -C "your-email@example.com"
 
 ---
 
-### 2. First Login with Password
+### Login with Password
 
 Log in to your V-Server using your username and password:
 ```bash
@@ -51,9 +48,9 @@ ssh <username>@<ip-address>
 
 ---
 
-### 3. Enable SSH Key Login
+### Enable SSH Key Login
 
-1.Copy your public SSH key to the V-Server.
+1. Copy your public SSH key to the V-Server.
 ```bash
 ssh-copy-id -i ~/path/to/id_ed25519.pub <username>@<ip-address>
 ```
@@ -65,7 +62,7 @@ ssh -i ~/path/to/id_ed25519 <username>@<ip-address>
 
 ---
 
-### 4. Disable Password Authentication
+### Disable Password Authentication
 
 1. After confirming SSH key login works, disable password authentication.
 ```bash
@@ -85,9 +82,9 @@ sudo systemctl restart ssh.service
 
 ---
 
-## Install Nginx
+## Setup Nginx
 
-### 1. Installation Process
+### Installation Process
 
 1. Update the package repository:
 ```bash
@@ -101,7 +98,7 @@ sudo apt install nginx -y
 
 ---
 
-### 2. Configure Nginx
+### Configure Nginx
 
 1. Create a new Nginx configuration file:
 ```bash
@@ -126,7 +123,7 @@ server {
 
 ---
 
-### 3. Create an alternative HTML Page
+### Create an alternative website
 
 1. Create Directory:
 ```bash
@@ -154,3 +151,44 @@ sudo systemctl restart nginx
 ```bash
 localhost:8081
 ```
+
+---
+
+## Configure Git and Github connection
+
+### Generate the SSH Key
+
+```bash
+ssh-keygen -t ed25519
+```
+
+---
+
+### Grab your SSH Key
+
+1. Read the key file
+```bash
+ssh-keygen -t ed25519
+```
+
+2. Copy the key
+
+---
+
+### Add the Key to Github
+
+1. Log in to GitHub.
+
+2. Click your Profile Photo → Settings.
+
+3. In the left sidebar, select SSH and GPG keys.
+
+4. Click the green New SSH key button.
+
+5. Title: Give it a clear name (e.g., "Main-Laptop" or "Web-Server").
+
+5. Key: Paste your public key into the box.
+
+6. Click Add SSH key.
+
+---
