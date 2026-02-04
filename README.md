@@ -1,4 +1,5 @@
 # V-Server Setup with SSH & Nginx
+
 This project explains how to securely configure a Linux V-Server using SSH key authentication and how to install and configure an Nginx web server.  
 It also demonstrates how to host an alternative website on a custom port. 
 ---
@@ -149,7 +150,7 @@ sudo systemctl restart nginx
 
 6. Open your browser to see your configured alternative start page:
 ```bash
-localhost:8081
+<your_ip>:8081  
 ```
 
 ---
@@ -168,10 +169,10 @@ ssh-keygen -t ed25519
 
 1. Read the key file
 ```bash
-ssh-keygen -t ed25519
+cat <path/to/your/key.pub>
 ```
 
-2. Copy the key
+2. Copy the Key Content (the entire line)
 
 ---
 
